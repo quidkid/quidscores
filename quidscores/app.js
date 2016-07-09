@@ -5,10 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var session = require('express-session')
+var session = require('express-session');
 var passport = require('passport');
+var FacebookStrategy = require('passport-facebook');
 var LocalStrategy = require('passport-local');
+var mongoose = require('mongoose');
+var MongoStore = require('connect-mongo')(session);
 
+var connect = process.env.MONGODB_URI;
+mongoose.connect(connect);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -31,6 +36,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', routes);
 // app.use('/users', users);
+
+
+
+app.use(session({
+    secret: process.env.SECRET,
+    // name: 'Catscoookie',
+    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
+
+
 
 
 app.use(passport.initialize());
@@ -70,7 +88,18 @@ passport.use(new LocalStrategy(function(username, password, done) {
   }
 ));
 
-
+// facebook strategy: 
+passport.use(new FacebookStrategy({
+    clientID: "1137006769694591",
+    clientSecret: "365a05efcba2292eff8c0c4b2a8aefa1",
+    callbackURL: "localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
 
 //to do --> put this after passport strategy
 app.use('/', auth(passport));
