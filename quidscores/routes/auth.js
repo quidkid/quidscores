@@ -4,6 +4,7 @@ var router = express.Router();
 var models = require('../models/models');
 var User = models.User
 
+
 module.exports = function(passport) {
 
   // GET registration page
