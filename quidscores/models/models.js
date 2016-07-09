@@ -35,15 +35,12 @@ var playerSchema = mongoose.Schema({
 var tournamentSchema = mongoose.Schema({
 	name: String,
 	date: Date,
-	location: String,
-	games: {
-		type: [Schema.Types.ObjectId]
-	}
+	location: String
 })
 
 module.exports = {
   User: mongoose.model('User', userSchema),
   Team: mongoose.model('Team', teamSchema),
-  Player: mongoose.mode('Player', playerSchema)
+  Player: mongoose.model('Player', playerSchema)
 
 };
