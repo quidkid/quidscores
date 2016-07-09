@@ -25,7 +25,6 @@ module.exports = function(passport) {
       });
     }
     var u = new User({
-      displayName: req.body.displayName,
       username: req.body.username,
       password: req.body.password,
     });
@@ -58,6 +57,26 @@ module.exports = function(passport) {
     req.logout();
     res.redirect('/login');
   });
+
+  //facebook route
+  router.get('/auth/facebook',
+    passport.authenticate('facebook'));
+
+  router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function(req, res) {
+      console.log("here");
+      // Successful authentication, redirect home.
+      res.redirect('/');
+    });
+
+  router.use(function(req,res,next) {
+    if (req.user) {
+      return next()
+    } else {
+      res.redirect('/login')
+    }
+  })
 
 
   return router;
