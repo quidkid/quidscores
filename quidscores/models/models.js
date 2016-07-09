@@ -45,4 +45,5 @@ module.exports = {
   User: mongoose.model('User', userSchema),
   Team: mongoose.model('Team', teamSchema),
   Player: mongoose.mode('Player', playerSchema)
+
 };
