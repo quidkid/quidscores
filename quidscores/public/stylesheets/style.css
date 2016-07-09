@@ -51,3 +51,24 @@ a {
 	background-color: #455879;
 	color: white;
 }
+
+.score-update {
+	margin: auto;
+	max-width: 960px;
+	margin-top: 50px;
+	padding: 30px 30px 30px 30px;
+	background-color: #EEEFF7;
+	color: #455879;
+	text-align: center;
+}
+
+/* update score page */
+.btn-round {
+	width: 200px;
+	height: 200px;
+	background-color: #455879;
+	color: white;
+	font-size: 36px;
+	border-radius: 50%;
+	border: none;
+}
