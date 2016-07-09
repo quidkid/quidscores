@@ -21,7 +21,7 @@ var users = require('./routes/users');
 var auth = require('./routes/auth');
 
 // models
-var User = require('./models/models');
+var User = require('./models/models').User;
 var app = express();
 
 // view engine setup
@@ -69,6 +69,7 @@ passport.deserializeUser(function(id, done) {
 // passport strategy
 passport.use(new LocalStrategy(function(username, password, done) {
     // Find the user with the given username
+    console.log(User.findOne);
     User.findOne({ username: username }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {

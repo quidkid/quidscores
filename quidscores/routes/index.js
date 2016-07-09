@@ -12,6 +12,21 @@ router.get('/', function(req, res, next) {
 	res.render('index');
 });
 
+// players
+// router.get('/players', function(req, res, next) {
+// 	res.render('players');
+// });
+
+
+
+//singlePlayer
+// router.get('/singlePlayer/:id', function(req, res, next) {
+//   Player.findById(req.params.id, function(error, user){
+//       res.render('singlePlayer', {
+
+//       })
+//   });
+// });
 
 
 
