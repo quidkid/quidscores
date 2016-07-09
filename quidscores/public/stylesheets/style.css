@@ -11,7 +11,7 @@ a {
 /* navigation bar */
 
 #logo {
-	color: #455879;
+	color: white; #455879;
 	font-size: 28px;
 	font-weight: bold;
 	margin: 0 auto;
@@ -20,7 +20,7 @@ a {
 }
 
 .nav-edit {
-	background-color: #F6E396 !important;
+	background-color: #6C0E0F !important; 
 	min-height: 75px;
 }
 
