@@ -21,7 +21,9 @@ var users = require('./routes/users');
 var auth = require('./routes/auth');
 
 // models
-var User = require('./models/models').User;
+
+var model = require('./models/models');
+var User = model.User;
 var app = express();
 
 // view engine setup
