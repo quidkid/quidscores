@@ -1,8 +1,9 @@
 // Add Passport-related auth routes here.
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
 
+var models = require('../models/models');
+var User = models.User
 
 module.exports = function(passport) {
 
