@@ -8,6 +8,10 @@ a {
   color: #00B7FF;
 }
 
+h1 {
+	color: #455879;
+}
+
 /* navigation bar */
 
 #logo {
@@ -22,6 +26,8 @@ a {
 .nav-edit {
 	background-color: #6C0E0F !important; 
 	min-height: 75px;
+	margin-bottom: 0;
+	border-radius: 0;
 }
 
 .navbar-header {
@@ -64,18 +70,39 @@ a {
 
 /* update score page */
 .btn-round {
-	width: 200px;
-	height: 200px;
+	width: 150px;
+	height: 150px;
 	background: #455879;
 	color: white;
-	font-size: 36px;
+	font-size: 30px;
+	font-weight: bold;
 	border-radius: 50%;
 	border: none;
+	margin: 0 10px;
 	background: radial-gradient(#455879, #31353D);
 	-webkit-transition: font-size 1s;	
 }
 
 .btn-round:hover {
-	font-size: 40px;
+	font-size: 36px;
 	background: radial-gradient(#455879 50%, #31353D 80%);
 }
+
+.btn-gold {
+	background: #FBA919;
+	background: radial-gradient(#F7EE23, #FBA919);
+}
+
+.btn-gold:hover {
+	font-size: 36px;
+	background: radial-gradient(#F7EE23 30%, #FBA919 80%);
+}
+
+.team {
+	text-align: center;
+	border-left: 5px solid #6C0E0F;
+	height: 100vh;
+}
+
+.team:last-child {
+	border-right: 5px solid #6C0E0F;
