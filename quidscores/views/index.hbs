@@ -1,21 +1,23 @@
 <div class="col-md-6 col-xs-6 team">
-  <h1>Team 1</h1>
+  <h1>Team 1 :</h1><span id="score1span">10</span>
 
   <form method="POST" class="score-update">
     <h1>Update Score</h1>
-
+    <div id="insert">
+    </div>
+    <input type="hidden" id="score1" name="score1" value="10">
     <div class="form-group">
       <label>Player Number</label>
-      <input type="text" name="playerNum1" class="form-control">
+      <input type="text" id="playerNum1" name="playerNum1" class="form-control">
     </div>
 
     <div class="form-group">
       <label>Comments</label>
-      <input type="text" name="comments1" class="form-control">
+      <input type="text" id="comments1" name="comments1" class="form-control">
     </div>
 
     <div class="form-group">
-      <button class="btn-round">GOAL</button>
+      <button type="submit" id="team1" class="btn-round">GOAL</button>
       <button class="btn-round btn-gold">SNITCH!</button>
     </div>
   </form>
@@ -25,22 +27,37 @@
 <div class="col-md-6 col-xs-6 team">
   <h1>Team 2</h1>
 
-  <form method="POST" class="score-update">
+  <form method="POST" id="team2" class="score-update">
     <h1>Update Score</h1>
-
+    
     <div class="form-group">
       <label>Player Number</label>
-      <input type="text" name="playerNum2" class="form-control">
+      <input type="text" id="playerNum2" name="playerNum2" class="form-control">
     </div>
 
     <div class="form-group">
       <label>Comments</label>
-      <input type="text" name="comments2" class="form-control">
+      <input type="text" id="comments2" name="comments2" class="form-control">
     </div>
 
     <div class="form-group">
-      <button class="btn-round">GOAL</button>
+      <button type="submit" id="team2" class="btn-round">GOAL</button>
       <button class="btn-round btn-gold">SNITCH!</button>
     </div>
   </form>
 </div>
+
+<script>
+$('#team1').on('click', function(e) {
+  console.log('hi izzy');
+  e.preventDefault();
+  var scoreTeam = parseInt($('#score1').val());
+  var newScore = scoreTeam + 10;
+  $('#score1span').text(newScore);
+  var string = "Player Number: " + $('#playerNum1').val()
+  $('<div id="insert">').append()
+
+
+  })
+
+</script>
