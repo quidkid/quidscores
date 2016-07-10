@@ -13,6 +13,7 @@ var LocalStrategy = require('passport-local');
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(session);
 
+
 var connect = process.env.MONGODB_URI;
 mongoose.connect(connect);
 
@@ -109,6 +110,8 @@ passport.use(new FacebookStrategy({
 //to do --> put this after passport strategy
 app.use('/', auth(passport));
 app.use('/', routes);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

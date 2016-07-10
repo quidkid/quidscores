@@ -15,10 +15,10 @@ var Player = models.Player;
 
 router.get('/', function(req, res, next) {
   if(req.user) {
-  res.render('index');
-} else {
-  res.redirect('/login')
-}
+    res.render('index');
+  } else {
+    res.redirect('/login')
+  }
 });
 
 router.post('/singleTournament/:id/newGame', function(req, res, next) {
@@ -34,12 +34,12 @@ router.get('/team/:id', function(req, res, next) {
 
   Game.find({$or: [{winner: req.params.id}, {loser: req.params.id}]})
   .populate('tournament').exec(function(error, games) {
-  res.render('team', {
-  games: games
-  })
+    res.render('team', {
+      games: games
+    })
 
   })
-    
+  
   
 });
 
@@ -99,10 +99,10 @@ router.post('/singlePlayers', function(req, res, next) {
 // players
 router.get('/players', function(req, res, next) {
   Player.find().exec(function(err, playa) {
-  res.render('players', {
-  playa: playa
-  })
-});
+    res.render('players', {
+      playa: playa
+    })
+  });
 })
 
 
@@ -141,11 +141,11 @@ router.post('/addTournaments', function(req, res, next) {
 // tournaments
 router.get('/tournaments', function(req, res, next) {
   Tournament.find().exec(function(err, tour) {
-      console.log("Tournament: ", tour);
-      console.log("Got", tour.length, "tournaments");
-      res.render('tournaments', {
-        tour: tour
-      })
+    console.log("Tournament: ", tour);
+    console.log("Got", tour.length, "tournaments");
+    res.render('tournaments', {
+      tour: tour
+    })
   });
 });
 
@@ -163,15 +163,15 @@ router.get('/tournaments/:id', function(req, res) {
 // singleTournament
 router.get('/singleTournament/:id', function(req,res,next) {
   Tournament.findById(req.params.id)
-    .populate('teams')
-    .exec(function(error, tour) {
+  .populate('teams')
+  .exec(function(error, tour) {
     console.log(tour._id);
     // req.body.tournament.push(tour);
     console.log('array', tour.teams);
     res.render('singleTournament', {
       // Tournament: req.body.tournament
       tour: tour
-      })
+    })
     
   })
 })
@@ -215,8 +215,13 @@ router.get('/singleTournament/:id/newGame', function(req, res, next) {
     })
 
 
-    })
   })
+})
+
+
+
+
+
 
 
 module.exports = router;

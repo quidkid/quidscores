@@ -60,7 +60,7 @@ module.exports = function(passport) {
 
   //facebook route
   router.get('/auth/facebook',
-    passport.authenticate('facebook'));
+    passport.authenticate('facebook', { scope: ['publish_actions'] }));
 
   router.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/login' }),

@@ -1,3 +1,4 @@
+
 <div class="col-md-6 col-xs-6 team">
   <h1>Team 1 : <span id="score1span">0</span></h1>
   <div class="table-responsive">
@@ -105,47 +106,85 @@ $('#team2').on('click', function(e) {
    $('#comments2').val("");
   })
 
-$('#snitch1').on('click', function(e) {
-  var scoreTeam1 = parseInt($('#score1span').text()) + 30;
-  var scoreTeam2 = parseInt($('#score2span').text());
-  var gameData = {};
-  gameData.winner = 
+// $('#snitch1').on('click', function(e) {
+//   var scoreTeam1 = parseInt($('#score1span').text()) + 30;
+//   var scoreTeam2 = parseInt($('#score2span').text());
+//   var gameData = {};
+//   gameData.winner = 
 
-  // winner: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Team'
-  // },
-  // loser: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Team'
-  // },
-  // //pure score numbers
-  // winScore: Number,
-  // loseScore: Number,
-  // // this will be for example: 111*^-250
-  // score: String,
-  // tournament: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: 'Tournament'
-  }
-  if (scoreTeam1 > scoreTeam2) {
-      $.ajax('/', {
-    method: 'post',
-    data: gameData,
-    success: function() {
-      var playernum = $('playerNum1').text();
-      var scoreTeam = parseInt($('score1').text());
-      var newScore = scoreTeam + 10;
+//   // winner: {
+//   //   type: mongoose.Schema.Types.ObjectId,
+//   //   ref: 'Team'
+//   // },
+//   // loser: {
+//   //   type: mongoose.Schema.Types.ObjectId,
+//   //   ref: 'Team'
+//   // },
+//   // //pure score numbers
+//   // winScore: Number,
+//   // loseScore: Number,
+//   // // this will be for example: 111*^-250
+//   // score: String,
+//   // tournament: {
+//   //   type: mongoose.Schema.Types.ObjectId,
+//   //   ref: 'Tournament'
+//   }
+//   if (scoreTeam1 > scoreTeam2) {
+//       $.ajax('/', {
+//     method: 'post',
+//     data: gameData,
+//     success: function() {
+//       var playernum = $('playerNum1').text();
+//       var scoreTeam = parseInt($('score1').text());
+//       var newScore = scoreTeam + 10;
 
-      var score1span = $('<span id="score1span">');
-      score1span.text(newScore);
-
-
-    }
-  })
+//       var score1span = $('<span id="score1span">');
+//       score1span.text(newScore);
 
 
-  }
-})
+//     }
+//   })
+
+
+//   }
+// }
 
 </script>
+
+  <div class="form-group">
+    <a id="test" class="btn btn-block btn-social btn-facebook">
+      <span class="fa fa-facebook"></span>Post.click
+    </a>
+  </div>
+</form>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1137006769694591',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.6'
+      });    
+    };
+      
+
+
+   (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  
+    
+
+    $('#test').click(function(e) {
+      FB.ui({
+        method: 'share',
+        href: 'http://www.google.com',
+      }, function(response){});
+    });
+  </script>
+
+
