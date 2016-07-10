@@ -32,7 +32,7 @@ h1 {
 
 .navbar-header {
 	margin: 0 auto !important;
-	float: none !important;
+	float: left !important;
 }
 
 .nav-full {
@@ -46,16 +46,23 @@ h1 {
 	background-image: none !important;
 }
 
+.logout-btn {
+	float: right;
+	margin-left: 15px !important;
+	margin-right: 15px !important;
+	margin-top: 15px;
+}
+
 /*forms */
 
 .form {
 	max-width: 300px;
 	margin: auto;
 	margin-top: 50px;
-	border: 0.5px solid gray;
+	border: 2px solid #455879;
 	padding: 30px 30px 30px 30px;
-	background-color: #455879;
-	color: white;
+	background-color: white;
+	color: #455879;
 }
 
 .score-update {
