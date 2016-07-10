@@ -43,6 +43,14 @@ var teamSchema = mongoose.Schema({
 	roster: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Player'
+	}],
+	tournaments: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Tournament'
+	}],
+	games: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Game'
 	}]
 });
 
@@ -50,10 +58,14 @@ var tournamentSchema = mongoose.Schema({
 	name: String,
 	date: String,
 	location: String,
-	games: {
-		type: [mongoose.Schema.Types.ObjectId],
+	teams: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Team'
+	}],
+	games: [{
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game'
-	}
+	}]
 
 });
 

@@ -1,9 +1,12 @@
 
 	<div class="container">
-		<h1>{{team.name}}</h1>
-		<p>{{team.region}}</p>
+		<h1>{{name}}</h1>
+		<p>{{region}}</p>
 	</div>
-
+<h2>Games Played</h2>
+{{#each games}}
+	{{tournament.name}}
 	<a href="/">Overview</a>
+	{{/each}}
 
 

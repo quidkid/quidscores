@@ -3,6 +3,7 @@ var router = express.Router();
 var models = require('../models/models');
 var Tournament = models.Tournament;
 var Team = models.Team;
+var Game = models.Game;
 var Player = require('../models/models');
 
 // add the following first in models: 
@@ -20,21 +21,26 @@ router.get('/', function(req, res, next) {
 }
 });
 
-router.post('/', function(req, res) {
+router.post('/singleTournament/:id/newGame', function(req, res, next) {
   console.log("Posting");
-  return;
+  res.render('index', {
+    op1: req.body
+  });
 })
 
 // players
-router.get('/team', function(req, res, next) {
-  Team.find().exec(function(err, tournament) {
+router.get('/team/:id', function(req, res, next) {
+
+  Game.find({$or: [{winner: req.params.id}, {loser: req.params.id}]})
+  .populate('tournament').exec(function(error, games) {
   res.render('team', {
-  name: req.body.name,
-  region: req.body.region,
-  roster: req.body.roster
+  games: games
   })
+
+  })
+    
+  
 });
-})
 
 
 //singlePlayer
@@ -102,14 +108,62 @@ router.get('/singlePlayer', function(req, res, next) {
 
 // singleTournament
 router.get('/singleTournament/:id', function(req,res,next) {
-  Tournament.findById(req.params.id, function(error, user) {
-    req.body.tournament.push(user);
-    console.log(req.session.cart)
+  Tournament.findById(req.params.id)
+    .populate('teams')
+    .exec(function(error, tour) {
+    console.log(tour._id);
+    // req.body.tournament.push(tour);
+    console.log('array', tour.teams);
     res.render('singleTournament', {
-      Tournament: req.body.tournament
-    })
+      // Tournament: req.body.tournament
+      tour: tour
+      })
+    
   })
 })
+
+// add Team
+router.get('/singleTournament/:id/addTeam', function(req, res, next) {
+  res.render('addTeam');
+})
+
+router.post('/singleTournament/:id/addTeam', function(req, res, next) {
+  var tourId = req.params.id;
+  console.log("lookkeee");
+  //TODO: check if a team already exists. 
+  //functionality to dropdown add an existing team or create a new one
+  var temp = [tourId]
+  var newTeam = new Team({
+    name: req.body.name,
+    region: req.body.region,
+    tournaments: temp
+  })
+  newTeam.save(function(err, team) {
+    console.log("after save");
+    if (err) return next(err);
+    Tournament.findByIdAndUpdate(tourId, {$push: {teams: team}},  function(err, team) {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+      res.redirect('/singleTournament/' + tourId);
+    });
+    
+
+  })
+})
+//newGame
+router.get('/singleTournament/:id/newGame', function(req, res, next) {
+  Tournament.findById(req.params.id, function(error, tour) {
+    if (error) return next(error);
+    res.render('newGame', {
+      tour: tour
+    })
+
+
+    })
+  })
+
 
 module.exports = router;
 

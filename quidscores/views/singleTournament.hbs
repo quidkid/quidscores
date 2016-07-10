@@ -1,0 +1,8 @@
+<h1>{{tour.name}}</h1>
+<a href="/singleTournament/{{tour._id}}/addTeam" class="btn btn-primary">Add a team</a>
+<a href="/singleTournament/{{tour._id}}/newGame" class="btn btn-primary">Add a new Game</a>
+{{tour.teams}}
+  <h2>Teams</h2>
+{{#each tour.teams}}
+	<a href="/team/{{_id}}"><b>{{name}}</b></a>
+{{/each}}

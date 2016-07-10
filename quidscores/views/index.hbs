@@ -1,33 +1,55 @@
 <div class="col-md-6 col-xs-6 team">
-  <h1>Team 1 :</h1><span id="score1span">10</span>
-
+  <h1>Team 1 : <span id="score1span">0</span></h1>
+  <div class="table-responsive">
+  <table class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th>Player #</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody id="insert1">
+    
+  </tbody>
+</table>
+</div>
+<button id="undo" class="btn btn-primary">Last Goal Not Good</button>
   <form method="POST" class="score-update">
     <h1>Update Score</h1>
-    <div id="insert">
-    </div>
-    <input type="hidden" id="score1" name="score1" value="10">
     <div class="form-group">
       <label>Player Number</label>
       <input type="text" id="playerNum1" name="playerNum1" class="form-control">
     </div>
 
     <div class="form-group">
-      <label>Comments</label>
+      <label>Notes</label>
       <input type="text" id="comments1" name="comments1" class="form-control">
     </div>
 
     <div class="form-group">
       <button type="submit" id="team1" class="btn-round">GOAL</button>
-      <button class="btn-round btn-gold">SNITCH!</button>
+      <button id="snitch1" class="btn-round btn-gold">SNITCH!</button>
     </div>
   </form>
 </div>
 
 
 <div class="col-md-6 col-xs-6 team">
-  <h1>Team 2</h1>
-
-  <form method="POST" id="team2" class="score-update">
+  <h1>Team 2 : <span id="score2span">0</span></h1>
+  <div class="table-responsive">
+  <table class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th>Player #</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody id="insert2">
+    
+  </tbody>
+</table>
+</div>
+  <form method="POST" class="score-update">
     <h1>Update Score</h1>
     
     <div class="form-group">
@@ -42,22 +64,88 @@
 
     <div class="form-group">
       <button type="submit" id="team2" class="btn-round">GOAL</button>
-      <button class="btn-round btn-gold">SNITCH!</button>
+      <button id="snitch2" class="btn-round btn-gold">SNITCH!</button>
     </div>
   </form>
 </div>
 
 <script>
+
 $('#team1').on('click', function(e) {
   console.log('hi izzy');
   e.preventDefault();
-  var scoreTeam = parseInt($('#score1').val());
+  var scoreTeam = parseInt($('#score1span').text());
   var newScore = scoreTeam + 10;
   $('#score1span').text(newScore);
-  var string = "Player Number: " + $('#playerNum1').val()
-  $('<div id="insert">').append()
 
+  
+  var row = '<tr><th scope="row">' + $('#playerNum1').val() + '</th><td>' + $('#comments1').val() + '</td></tr>'
 
+  $('#insert1').append(row);
+  $('#score1').val(newScore);
+
+  $('#playerNum1').val("");
+   $('#comments1').val("");
   })
+
+$('#team2').on('click', function(e) {
+  console.log('hi izzy');
+  e.preventDefault();
+  var scoreTeam = parseInt($('#score1span').text());
+  var newScore = scoreTeam + 10;
+  $('#score2span').text(newScore);
+
+  
+  var row = '<tr><th scope="row">' + $('#playerNum2').val() + '</th><td>' + $('#comments2').val() + '</td></tr>'
+
+  $('#insert2').append(row);
+  $('#score2').val(newScore);
+
+  $('#playerNum2').val("");
+   $('#comments2').val("");
+  })
+
+$('#snitch1').on('click', function(e) {
+  var scoreTeam1 = parseInt($('#score1span').text()) + 30;
+  var scoreTeam2 = parseInt($('#score2span').text());
+  var gameData = {};
+  gameData.winner = 
+
+  // winner: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Team'
+  // },
+  // loser: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Team'
+  // },
+  // //pure score numbers
+  // winScore: Number,
+  // loseScore: Number,
+  // // this will be for example: 111*^-250
+  // score: String,
+  // tournament: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Tournament'
+  }
+  if (scoreTeam1 > scoreTeam2) {
+      $.ajax('/', {
+    method: 'post',
+    data: gameData,
+    success: function() {
+      var playernum = $('playerNum1').text();
+      var scoreTeam = parseInt($('score1').text());
+      var newScore = scoreTeam + 10;
+
+      var score1span = $('<span id="score1span">');
+      score1span.text(newScore);
+
+
+    }
+  })
+
+
+  }
+})
 
 </script>
