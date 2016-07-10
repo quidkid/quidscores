@@ -1,8 +1,10 @@
 <div class="col-md-6 col-xs-6 team">
-  <h1>Team 1 :</h1><div id="insert"><span id="score1span">10</span></div>
+  <h1>Team 1 :</h1><span id="score1span">10</span>
 
   <form method="POST" class="score-update">
     <h1>Update Score</h1>
+    <div id="insert">
+    </div>
     <input type="hidden" id="score1" name="score1" value="10">
     <div class="form-group">
       <label>Player Number</label>
@@ -49,29 +51,13 @@
 $('#team1').on('click', function(e) {
   console.log('hi izzy');
   e.preventDefault();
-  var target = $(e.target);
-  var inputs = target.find('input');
-  var game1 = {};
-  inputs.each(function(i, inputElement) {
-    var val = $(inputElement).val();
-    var keyname = $(inputElement).attr('name');
-    game1[keyname] = val;
-  });
-
-   $.ajax('/', {
-    method: 'POST',
-    data: game1,
-    success: function() {
-      var playernum = $('#playerNum1').text();
-      var scoreTeam = parseInt($('#score1').text());
-      var newScore = scoreTeam + 10;
-
-      var score1span = $('<span id="score1span">');
-      score1span.text(newScore);
+  var scoreTeam = parseInt($('#score1').val());
+  var newScore = scoreTeam + 10;
+  $('#score1span').text(newScore);
+  var string = "Player Number: " + $('#playerNum1').val()
+  $('<div id="insert">').append()
 
 
-    }
   })
 
-})
 </script>
