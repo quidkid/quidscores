@@ -62,6 +62,11 @@ router.get('/team/:id', function(req, res, next) {
   })
 });
 
+router.get('/profiles/quidkid', function(req, res) {
+  res.render('playerProfile', {
+    loggedIn: true
+  });
+})
 
 
 // add team

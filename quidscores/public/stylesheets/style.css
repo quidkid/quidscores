@@ -12,6 +12,10 @@ h1 {
 	color: #455879;
 }
 
+img {
+	max-width: 450px;
+}
+
 /* navigation bar */
 
 #logo {
@@ -173,4 +177,29 @@ h1 {
 	background-color: white;
 	color: #455879;
 	text-align: center;
+}
+
+/* player profile */
+
+.playerSection {
+	display: inline-block;
+	background-color: white;
+	padding: 25px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+.playerSection p {
+	float: right;
+	margin-left: 15px;
+	font-size: 20px;
+}
+
+.playerSection h1 {
+	text-align: left;
+}
+
+.playerSection img {
+	border-radius: 50%;
+	float: left;
 }
