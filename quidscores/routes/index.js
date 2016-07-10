@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Tournament = require('../models/models')
 
 // add the following first in models: 
 // var User = 
@@ -9,7 +10,11 @@ var router = express.Router();
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-	res.render('index');
+  if(req.user) {
+  res.render('index');
+} else {
+  res.redirect('/login')
+}
 });
 
 // players
@@ -37,6 +42,51 @@ router.get('/singlePlayer/:id', function(req, res, next) {
 // score
 router.get('/score', function(req, res, next) {
   res.render('score');
+});
+
+// addTournaments
+
+router.get('/addTournaments', function(req, res, next) {
+  console.log("addTournaments")
+  res.render('addTournaments');
+});
+
+
+router.post('/addTournaments', function(req, res, next) {
+  var tour = new Tournament({
+    name: req.body.name,
+    date: req.body.date,
+    location: req.body.location,
+    games: req.body.games
+  })
+  tour.save(function(error) {
+    if(error) {
+      console.log('hmm?', error)
+      res.render('addTournaments', {
+        error: error
+      });
+    } else {
+      res.redirect('/tournaments');
+    }
+  })
+})
+
+
+// tournaments
+
+router.get('/tournaments', function(req, res, next) {
+  res.render('tournaments');
+});
+
+
+// singleplayer
+router.get('/singlePlayer', function(req, res, next) {
+  res.render('singlePlayer');
+});
+
+// singleTournament
+router.get('/singleTournament', function(req, res, next) {
+  res.render('singleTournament');
 });
 
 

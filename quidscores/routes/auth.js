@@ -72,8 +72,10 @@ module.exports = function(passport) {
 
   router.use(function(req,res,next) {
     if (req.user) {
+      console.log("Logged in")
       return next()
     } else {
+      console.log("Not logged in")
       res.redirect('/login')
     }
   })
