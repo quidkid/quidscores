@@ -1,6 +1,6 @@
 body {
   padding: 0;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "Open Sans", Helvetica, sans-serif;
   background-color: #EEEFF7;
 }
 
@@ -66,9 +66,16 @@ a {
 .btn-round {
 	width: 200px;
 	height: 200px;
-	background-color: #455879;
+	background: #455879;
 	color: white;
 	font-size: 36px;
 	border-radius: 50%;
 	border: none;
+	background: radial-gradient(#455879, #31353D);
+	-webkit-transition: font-size 1s;	
+}
+
+.btn-round:hover {
+	font-size: 40px;
+	background: radial-gradient(#455879 50%, #31353D 80%);
 }
