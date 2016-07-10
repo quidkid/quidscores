@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models/models')
+var Tournament = require('../models/models')
+var Player = require('../models/models')
 
 // add the following first in models: 
 // var User = 
@@ -25,9 +27,9 @@ router.get('/team', function(req, res, next) {
 
 
 //singlePlayer
-router.get('/singlePlayer/:id', function(req, res, next) {
-  models.Player.findById(req.params.id, function(error, user){
-      res.render('singlePlayer', {
+router.get('/singlePlayers/:id', function(req, res, next) {
+  Player.findById(req.params.id, function(error, user){
+      res.render('singlePlayers', {
      name: req.body.name,
      age: req.body.age,
      height: req.body.height,
@@ -84,10 +86,15 @@ router.get('/singlePlayer', function(req, res, next) {
 });
 
 // singleTournament
-router.get('/singleTournament', function(req, res, next) {
-  res.render('singleTournament');
-});
-
+router.get('/singleTournament/:id', function(req,res,next) {
+  Tournament.findById(req.params.id, function(error, user) {
+    req.body.tournament.push(user);
+    console.log(req.session.cart)
+    res.render('singleTournament', {
+      Tournament: req.body.tournament
+    })
+  })
+})
 
 module.exports = router;
 
