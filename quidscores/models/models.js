@@ -46,20 +46,6 @@ var teamSchema = mongoose.Schema({
 	}]
 });
 
-teamSchema.methods.getPlayers = function (teamId, callback){
-    Player.find({teamId: teamId}).populate("").exec(function(error, playersArray) {
-      if (error) callback(error);
-      else {
-        callback(error, playersArray);
-      }
-
-    })
-  }
-
-var Team = mongoose.model('Team', teamSchema);
-
-
-
 var tournamentSchema = mongoose.Schema({
 	name: String,
 	date: Date,
@@ -90,8 +76,6 @@ var gameSchema = mongoose.Schema({
 		ref: 'Tournament'
 	}
 })
-
-var Game = mongoose.model('Game', gameSchema);
 
 module.exports = {
   User: mongoose.model('User', userSchema),
