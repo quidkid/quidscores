@@ -48,7 +48,7 @@ var teamSchema = mongoose.Schema({
 
 var tournamentSchema = mongoose.Schema({
 	name: String,
-	date: Date,
+	date: String,
 	location: String,
 	games: {
 		type: [mongoose.Schema.Types.ObjectId],

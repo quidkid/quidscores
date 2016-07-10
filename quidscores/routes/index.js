@@ -59,7 +59,7 @@ router.get('/addTournaments', function(req, res, next) {
 
 router.post('/addTournaments', function(req, res, next) {
   console.log("here");
-  var tour = new models.Tournament({
+  var tour = new Tournament({
     name: req.body.tName,
     date: req.body.tDate,
     location: req.body.tLocation
@@ -71,6 +71,7 @@ router.post('/addTournaments', function(req, res, next) {
         error: error
       });
     } else {
+      console.log("here: ", tour);
       res.redirect('/tournaments');
     }
   })
