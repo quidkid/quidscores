@@ -1,8 +1,81 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  font: 16px "Open Sans", Helvetica, sans-serif;
+  background-color: #EEEFF7;
 }
 
 a {
   color: #00B7FF;
+}
+
+/* navigation bar */
+
+#logo {
+	color: white; #455879;
+	font-size: 28px;
+	font-weight: bold;
+	margin: 0 auto;
+	width: 200px;
+	padding-top: 27px;
+}
+
+.nav-edit {
+	background-color: #6C0E0F !important; 
+	min-height: 75px;
+}
+
+.navbar-header {
+	margin: 0 auto !important;
+	float: none !important;
+}
+
+.nav-full {
+	height: 100% !important;
+}
+
+.navbar-default {
+	border: none !important;
+	box-shadow: none !important;
+	webkit-box-shadow: none !important;
+	background-image: none !important;
+}
+
+/*forms */
+
+.form {
+	max-width: 300px;
+	margin: auto;
+	margin-top: 50px;
+	border: 0.5px solid gray;
+	padding: 30px 30px 30px 30px;
+	background-color: #455879;
+	color: white;
+}
+
+.score-update {
+	margin: auto;
+	max-width: 960px;
+	margin-top: 50px;
+	padding: 30px 30px 30px 30px;
+	background-color: #EEEFF7;
+	color: #455879;
+	text-align: center;
+}
+
+/* update score page */
+.btn-round {
+	width: 200px;
+	height: 200px;
+	background: #455879;
+	color: white;
+	font-size: 36px;
+	border-radius: 50%;
+	border: none;
+	background: radial-gradient(#455879, #31353D);
+	-webkit-transition: font-size 1s;	
+}
+
+.btn-round:hover {
+	font-size: 40px;
+	background: radial-gradient(#455879 50%, #31353D 80%);
 }

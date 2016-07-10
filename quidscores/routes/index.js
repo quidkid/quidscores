@@ -12,7 +12,32 @@ router.get('/', function(req, res, next) {
 	res.render('index');
 });
 
+// players
+router.get('/team', function(req, res, next) {
+	res.render('team');
+});
 
+
+
+//singlePlayer
+router.get('/singlePlayer/:id', function(req, res, next) {
+  Player.findById(req.params.id, function(error, user){
+      res.render('singlePlayer', {
+     name: req.body.name,
+     age: req.body.age,
+     height: req.body.height,
+	region: req.body.region,
+	mainPosition: req.body.mainPosition,
+	otherPositions: req.body.otherPositions
+      })
+  });
+});
+
+
+// score
+router.get('/score', function(req, res, next) {
+  res.render('score');
+});
 
 
 module.exports = router;

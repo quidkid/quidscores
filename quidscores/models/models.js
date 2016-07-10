@@ -1,6 +1,7 @@
 "use strict";
 
 var mongoose = require('mongoose');
+var findOrCreate = require('mongoose-findorcreate')
 
 
 var userSchema = mongoose.Schema({
@@ -10,6 +11,8 @@ var userSchema = mongoose.Schema({
   password: String,
   facebookId: String
 });
+
+userSchema.plugin(findOrCreate);
 
 var teamSchema = mongoose.Schema({
 	name: String,

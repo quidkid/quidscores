@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var session = require('express-session');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook');
@@ -19,7 +20,10 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
 
+// models
 
+var model = require('./models/models');
+var User = model.User;
 var app = express();
 
 // view engine setup
@@ -67,6 +71,7 @@ passport.deserializeUser(function(id, done) {
 // passport strategy
 passport.use(new LocalStrategy(function(username, password, done) {
     // Find the user with the given username
+    console.log(User.findOne);
     User.findOne({ username: username }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
@@ -92,7 +97,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 passport.use(new FacebookStrategy({
     clientID: "1137006769694591",
     clientSecret: "365a05efcba2292eff8c0c4b2a8aefa1",
-    callbackURL: "localhost:3000/auth/facebook/callback"
+    callbackURL: "/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
