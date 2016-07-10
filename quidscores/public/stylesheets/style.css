@@ -5,7 +5,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #455879;
 }
 
 h1 {
@@ -52,6 +52,16 @@ h1 {
 	margin-left: 15px !important;
 	margin-right: 15px !important;
 	margin-top: 15px;
+	color: white;
+	font-weight: bold;
+	border: 2px solid white;
+	border-radius: 0;
+
+}
+
+.logout-btn:hover {
+	color: #6C0E0F;
+	background-color: white;
 }
 
 .nav-ul {
