@@ -69,6 +69,8 @@ var gameSchema = mongoose.Schema({
 	}
 })
 
+var Game = mongoose.model('Game', gameSchema);
+
 module.exports = {
   User: mongoose.model('User', userSchema),
   Team: mongoose.model('Team', teamSchema),
