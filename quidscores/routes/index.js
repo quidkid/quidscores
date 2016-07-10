@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Tournament = require('../models/models')
+var models = require('../models/models')
 
 // add the following first in models: 
 // var User = 
@@ -26,7 +26,7 @@ router.get('/team', function(req, res, next) {
 
 //singlePlayer
 router.get('/singlePlayer/:id', function(req, res, next) {
-  Player.findById(req.params.id, function(error, user){
+  models.Player.findById(req.params.id, function(error, user){
       res.render('singlePlayer', {
      name: req.body.name,
      age: req.body.age,
@@ -53,11 +53,10 @@ router.get('/addTournaments', function(req, res, next) {
 
 
 router.post('/addTournaments', function(req, res, next) {
-  var tour = new Tournament({
-    name: req.body.name,
-    date: req.body.date,
-    location: req.body.location,
-    games: req.body.games
+  var tour = new models.Tournament({
+    name: req.body.tName,
+    date: req.body.tDate,
+    location: req.body.tLocation
   })
   tour.save(function(error) {
     if(error) {
