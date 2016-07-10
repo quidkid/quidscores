@@ -32,7 +32,6 @@ router.get('/team', function(req, res, next) {
   region: req.body.region,
   roster: req.body.roster
   })
-	res.render('team');
 });
 })
 
