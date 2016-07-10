@@ -1,22 +1,18 @@
-{{#if error}}
-  <div class="alert alert-danger" role="alert">
-    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-    <span class="sr-only">Error:</span>
-    {{error}}
-  </div>
-{{/if}}
 <form method="POST" class="form">
 <h3>Login</h3>
   <div class="form-group">
-    <label>Username</label>
-    <input type="text" name="username" class="form-control">
+    <label>Tournament name</label>
+    <input type="text" name="tName" class="form-control">
   </div>
   <div class="form-group">
-    <label>Password</label>
-    <input type="password" name="password" class="form-control">
+    <label>Date</label>
+    <input type="text" name="tDate" class="form-control">
   </div>
   <div class="form-group">
-    <button class="btn btn-success">Login</button>
-    <a class="btn btn-primary" href="/register">Register</a>
+    <label>Location</label>
+    <input type="text" name="tLocation" class="form-control">
+  </div>
+  <div class="form-group">
+    <a class="btn btn-primary" href="/register">Submit</a>
   </div>
 </form>
