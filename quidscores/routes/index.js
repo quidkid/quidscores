@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models/models');
 var Tournament = models.Tournament;
+var Team = models.Team;
 var Player = require('../models/models');
 
 // add the following first in models: 
@@ -26,9 +27,14 @@ router.post('/', function(req, res) {
 
 // players
 router.get('/team', function(req, res, next) {
-	res.render('team');
+  Team.find().exec(function(err, tournament) {
+  res.render('team', {
+  name: req.body.name,
+  region: req.body.region,
+  roster: req.body.roster
+  })
 });
-
+})
 
 
 //singlePlayer
@@ -59,8 +65,7 @@ router.get('/addTournaments', function(req, res, next) {
 
 
 router.post('/addTournaments', function(req, res, next) {
-  console.log("here");
-  var tour = new models.Tournament({
+  var tour = new Tournament({
     name: req.body.tName,
     date: req.body.tDate,
     location: req.body.tLocation
@@ -75,20 +80,18 @@ router.post('/addTournaments', function(req, res, next) {
       res.redirect('/tournaments');
     }
   })
-})
+});
 
 
 // tournaments
-
 router.get('/tournaments', function(req, res, next) {
-  Tournament.find().exec(function(err, tournament) {
+  Tournament.find().exec(function(err, tour) {
+      console.log("Tournament: ", tour);
+      console.log("Got", tour.length, "tournaments");
       res.render('tournaments', {
-        name: req.body.name,
-        date: req.body.date,
-        location: req.body.location
+        tour: tour
       })
   });
-  res.render('tournaments');
 });
 
 
