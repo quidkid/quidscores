@@ -26,8 +26,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/singleTournament/:id/saveGame', function(req, res, next) {
   console.log("here i am today");
-  var newGame = new Game(req.body.data);
-  console.log("yo body ", req.body.data);
+  var newGame = new Game(req.body);
+  console.log("yo body ", req.body);
   newGame.save(function(err, game) {
     if (err) return next(err);
     res.redirect('/tournaments');
@@ -37,6 +37,7 @@ router.post('/singleTournament/:id/saveGame', function(req, res, next) {
 router.post('/singleTournament/:id/newGame', function(req, res, next) {
   console.log("Posting");
   res.render('index', {
+    loggedIn: true,
     op1: req.body.op1,
     op2: req.body.op2,
     teamid1: req.body.teamid1,
@@ -49,15 +50,18 @@ router.post('/singleTournament/:id/newGame', function(req, res, next) {
 // players
 
 router.get('/team/:id', function(req, res, next) {
-
-  Game.find({$or: [{winner: req.params.id}, {loser: req.params.id}]})
+  Team.findById(req.params.id, function(err, team) {
+    Game.find({$or: [{winner: req.params.id}, {loser: req.params.id}]})
   .populate('tournament').exec(function(error, games) {
   res.render('team', {
+  team: team,
   games: games,
   loggedIn: true
   })
 
   })
+  })
+  
     
   
 });
