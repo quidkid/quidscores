@@ -1,12 +1,11 @@
-<<<<<<< HEAD
+<div class="container-fluid tours">
 <h1>Tournaments</h1>
 
 {{#each tour}}
-  <h1>{{name}}</h1>
-=======
-{{#each tournament}}
-<div>
-  <h1>{{this.tournaments}}</h1>
-</div>
->>>>>>> 06dda1e9154c5786c292992ae6dd1526795b423a
+  <div href="/tournaments/{{_id}}" class="singleTour">
+    <h2>{{name}}</h2>
+    <p>On {{date}} at {{location}}</p>
+    <a href="/tournaments/{{_id}}" class="btn btn-primary">View tournament</a>
+  </div>
 {{/each}}
+</div>

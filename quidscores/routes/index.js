@@ -95,6 +95,14 @@ router.get('/tournaments', function(req, res, next) {
   });
 });
 
+router.get('/tournaments/:id', function(req, res) {
+  Tournament.findById(req.params.id, function(err, tour) {
+    res.render('singleTournament', {
+      tour: tour
+    })
+  })
+})
+
 
 // singleplayer
 router.get('/singlePlayer', function(req, res, next) {
