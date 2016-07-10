@@ -13,8 +13,8 @@ router.get('/', function(req, res, next) {
 });
 
 // players
-router.get('/players', function(req, res, next) {
-	res.render('players');
+router.get('/team', function(req, res, next) {
+	res.render('team');
 });
 
 
@@ -33,6 +33,11 @@ router.get('/singlePlayer/:id', function(req, res, next) {
   });
 });
 
+
+// score
+router.get('/score', function(req, res, next) {
+  res.render('score');
+});
 
 
 module.exports = router;
