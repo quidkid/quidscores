@@ -1,6 +1,6 @@
 
 <div class="col-md-6 col-xs-6 team">
-  <h1>Team 1 : <span id="score1span">0</span></h1>
+  <h1>{{op1}} : <span id="score1span">0</span></h1>
   <div class="table-responsive">
   <table class="table table-sm table-hover">
   <thead>
@@ -36,20 +36,20 @@
 
 
 <div class="col-md-6 col-xs-6 team">
-  <h1>Team 2 : <span id="score2span">0</span></h1>
+  <h1>{{op2}} : <span id="score2span">0</span></h1>
   <div class="table-responsive">
-  <table class="table table-sm table-hover">
-  <thead>
-    <tr>
-      <th>Player #</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody id="insert2">
-    
-  </tbody>
-</table>
-</div>
+    <table class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th>Player #</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="insert2">
+        
+      </tbody>
+    </table>
+  </div>
   <form method="POST" class="score-update">
     <h1>Update Score</h1>
     
@@ -69,7 +69,6 @@
     </div>
   </form>
 </div>
-
 <script>
 
 $('#team1').on('click', function(e) {
@@ -92,7 +91,7 @@ $('#team1').on('click', function(e) {
 $('#team2').on('click', function(e) {
   console.log('hi izzy');
   e.preventDefault();
-  var scoreTeam = parseInt($('#score1span').text());
+  var scoreTeam = parseInt($('#score2span').text());
   var newScore = scoreTeam + 10;
   $('#score2span').text(newScore);
 
@@ -106,40 +105,142 @@ $('#team2').on('click', function(e) {
    $('#comments2').val("");
   })
 
-// $('#snitch1').on('click', function(e) {
-//   var scoreTeam1 = parseInt($('#score1span').text()) + 30;
-//   var scoreTeam2 = parseInt($('#score2span').text());
-//   var gameData = {};
-//   gameData.winner = 
 
-//   // winner: {
-//   //   type: mongoose.Schema.Types.ObjectId,
-//   //   ref: 'Team'
-//   // },
-//   // loser: {
-//   //   type: mongoose.Schema.Types.ObjectId,
-//   //   ref: 'Team'
-//   // },
-//   // //pure score numbers
-//   // winScore: Number,
-//   // loseScore: Number,
-//   // // this will be for example: 111*^-250
-//   // score: String,
-//   // tournament: {
-//   //   type: mongoose.Schema.Types.ObjectId,
-//   //   ref: 'Tournament'
+$('#snitch1').on('click', function(e) {
+  e.preventDefault();
+
+  var scoreTeam1 = parseInt($('#score1span').text()) + 30;
+  var scoreTeam2 = parseInt($('#score2span').text());
+  if (scoreTeam1 === scoreTeam2) {
+    return;
+  }
+  else if (scoreTeam1 > scoreTeam2) {
+    var gameData = {};
+  gameData.winner = {$oid: "{{teamid1}}"};
+  gameData.loser = {$oid: "{{teamid2}}"};
+  gameData.winScore = scoreTeam1;
+   gameData.loseScore = scoreTeam2;
+   gameData.score = scoreTeam1 + "* - " + scoreTeam2;
+   gameData.tournament = {$oid: "{{tourId}}"};
+
+   console.log(gameData);
+
+   $.ajax('/singleTournament/{{tourId}}/saveGame', {
+    method: 'post',
+    data: gameData,
+    success: function() {
+    console.log("success")
+
+    }
+
+  })
+}
+
+  else {
+  var gameData = {};
+  gameData.winner = {$oid: "{{teamid2}}"};
+  gameData.loser = {$oid: "{{teamid1}}"};
+  gameData.winScore = scoreTeam2;
+   gameData.loseScore = scoreTeam1;
+   gameData.score = scoreTeam2 + "* - " + scoreTeam1;
+   gameData.tournament = {$oid: "{{tourId}}"};
+   console.log(gameData);
+
+   $.ajax('/singleTournament/{{tourId}}/saveGame', {
+    method: 'post',
+    data: gameData,
+    success: function() {
+    console.log("success")
+
+    }
+  })
+  
+}
+
+})
+
+$('#snitch2').on('click', function(e) {
+  e.preventDefault();
+
+  var scoreTeam1 = parseInt($('#score1span').text());
+  var scoreTeam2 = parseInt($('#score2span').text()) + 30;
+  if (scoreTeam1 === scoreTeam2) {
+    return;
+  }
+  else if (scoreTeam1 > scoreTeam2) {
+    var gameData = {};
+  gameData.winner = {$oid: "{{teamid1}}"};
+  gameData.loser = {$oid: "{{teamid2}}"};
+  gameData.winScore = scoreTeam1;
+   gameData.loseScore = scoreTeam2;
+   gameData.score = scoreTeam1 + "* - " + scoreTeam2;
+   gameData.tournament = {$oid: "{{tourId}}"};
+
+   console.log(gameData);
+
+   $.ajax('/singleTournament/{{tourId}}/saveGame', {
+    method: 'post',
+    data: gameData,
+    success: function() {
+    console.log("success")
+
+    }
+
+  })
+}
+
+  else {
+  var gameData = {};
+  gameData.winner = {$oid: "{{teamid2}}"};
+  gameData.loser = {$oid: "{{teamid1}}"};
+  gameData.winScore = scoreTeam2;
+   gameData.loseScore = scoreTeam1;
+   gameData.score = scoreTeam2 + "* - " + scoreTeam1;
+   gameData.tournament = {$oid: "{{tourId}}"};
+   console.log(gameData);
+
+   $.ajax('/singleTournament/{{tourId}}/saveGame', {
+    method: 'post',
+    data: gameData,
+    success: function() {
+    console.log("success")
+
+    }
+  })
+  
+}
+
+})
+  // gameData.winner = 
+
+//   // // winner: {
+//   // //   type: mongoose.Schema.Types.ObjectId,
+//   // //   ref: 'Team'
+//   // // },
+//   // // loser: {
+//   // //   type: mongoose.Schema.Types.ObjectId,
+//   // //   ref: 'Team'
+//   // // },
+//   // // //pure score numbers
+//   // // winScore: Number,
+//   // // loseScore: Number,
+//   // // // this will be for example: 111*^-250
+//   // // score: String,
+//   // // tournament: {
+//   // //   type: mongoose.Schema.Types.ObjectId,
+//   // //   ref: 'Tournament'
 //   }
-//   if (scoreTeam1 > scoreTeam2) {
-//       $.ajax('/', {
-//     method: 'post',
-//     data: gameData,
-//     success: function() {
-//       var playernum = $('playerNum1').text();
-//       var scoreTeam = parseInt($('score1').text());
-//       var newScore = scoreTeam + 10;
+  // if (scoreTeam1 > scoreTeam2) {
+  //     $.ajax('/', {
+  //   method: 'post',
+  //   data: gameData,
+  //   success: function() {
+  //     var playernum = $('playerNum1').text();
+  //     var scoreTeam = parseInt($('score1').text());
+  //     var newScore = scoreTeam + 10;
 
-//       var score1span = $('<span id="score1span">');
-//       score1span.text(newScore);
+  //     var score1span = $('<span id="score1span">');
+  //     score1span.text(newScore);
 
 
 //     }
@@ -147,7 +248,7 @@ $('#team2').on('click', function(e) {
 
 
 //   }
-// }
+// })
 
 </script>
 
@@ -186,5 +287,7 @@ $('#team2').on('click', function(e) {
       }, function(response){});
     });
   </script>
+
+
 
 

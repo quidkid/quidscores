@@ -36,13 +36,21 @@
             <span class="icon-bar"></span>
           </button>
 
-            <a id="logo" class="navbar-brand" href="/">QuidScore</a>
+            <a id="logo" class="navbar-brand" href="/tournaments">QuidScore</a>
         
-
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <a href="/logout" type="button" class="btn btn-danger btn-lg logout-btn">Logout</a>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {{#if loggedIn}}
+              <ul class="nav navbar-nav navbar-left">
+                <li>
+                  <a href="/tournaments" class="nav-links">Tournaments</a>
+                </li>
+                <li>
+                  <a href="/addTournaments" class="nav-links">Add tournament</a>
+                </li>
+              </ul>
+              <a href="/logout" type="button" class="btn btn-lg logout-btn">Logout</a>
+            {{/if}}
           </div>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

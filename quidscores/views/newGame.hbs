@@ -10,10 +10,17 @@
 <h3>New Game</h3>
   <div class="form-group">
     <label>Opponent 1</label>
-    <select class="form-control">
-      {{#each teams}}
-      <option name="{{this._id}}">this.name</option>
-      {{/each}}
+    <select name="teamid1" class="form-control">
+      <option></option>
+      <option value="57825e44910c95113fbe3f1d">Drexel Quidditch</option>
+    </select>
+   <input type="hidden" name="op1" value="Drexel Quidditch">
+    <label>Opponent 2</label>
+    
+   <input type="hidden" name="op2" value="Philadelphia Honey Badgers">
+   <select name="teamid1" class="form-control">
+    <option></option>
+      <option value="57825e4b910c95113fbe3f1e">Philadelphia Honey Badgers</option>
     </select>
   </div>
   <div class="form-group">
