@@ -18,13 +18,16 @@ var teamSchema = mongoose.Schema({
 	name: String,
 	region: String,
 	roster: {
-		
+		type: [mongoose.Schema.Types.ObjectId],
+		ref: 'Player'
 	}
 });
 
 var playerSchema = mongoose.Schema({
 	name: String,
 	region: String,
+	age: Number,
+	height: String,
 	mainPosition: {
 		type: String,
 		enum: ['Keeper', 'Chaser', 'Beater', 'Seeker']
@@ -38,11 +41,39 @@ var playerSchema = mongoose.Schema({
 var tournamentSchema = mongoose.Schema({
 	name: String,
 	date: Date,
-	location: String
+	location: String,
+	games: {
+		type: [mongoose.Schema.Types.ObjectId],
+		ref: 'Game'
+	}
+
+});
+
+var gameSchema = mongoose.Schema({
+	winner: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Team'
+	},
+	loser: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Team'
+	},
+	//pure score numbers
+	winScore: Number,
+	loseScore: Number,
+	// this will be for example: 111*^-250
+	score: String,
+	tournament: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Tournament'
+	}
 })
 
 module.exports = {
   User: mongoose.model('User', userSchema),
   Team: mongoose.model('Team', teamSchema),
-  Player: mongoose.model('Player', playerSchema)
+  Player: mongoose.model('Player', playerSchema),
+  Tournament: mongoose.model('Tournament', tournamentSchema),
+  Game: mongoose.model('Game', gameSchema)
+
 };
