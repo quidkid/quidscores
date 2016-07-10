@@ -97,7 +97,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 passport.use(new FacebookStrategy({
     clientID: "1137006769694591",
     clientSecret: "365a05efcba2292eff8c0c4b2a8aefa1",
-    callbackURL: "localhost:3000/auth/facebook/callback"
+    callbackURL: "/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ facebookId: profile.id }, function (err, user) {
