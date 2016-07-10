@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models/models');
 var Tournament = models.Tournament;
+var Team = models.Team;
 var Player = require('../models/models');
 
 // add the following first in models: 
@@ -26,9 +27,15 @@ router.post('/', function(req, res) {
 
 // players
 router.get('/team', function(req, res, next) {
+  Team.find().exec(function(err, tournament) {
+  res.render('team', {
+  name: req.body.name,
+  region: req.body.region,
+  roster: req.body.roster
+  })
 	res.render('team');
 });
-
+})
 
 
 //singlePlayer
