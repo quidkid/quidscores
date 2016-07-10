@@ -1,8 +1,29 @@
+<div class="container-fluid">
+	<div class="tourInfo">
+		<h1><b>{{tour.name}}</b></h1>
+		<p>Tournament {{tour.name}} held on {{tour.date}} at {{tour.location}}.</p>
+		<a href="/singleTournament/{{tour._id}}/addTeam" class="btn btn-primary">Add a team</a>
+		<a href="/singleTournament/{{tour._id}}/newGame" class="btn btn-primary">Add a new Game</a>
+	</div>
+	<div>
+	 <h2>Teams</h2>
 
-<h1>{{tour.name}}</h1>
-<a href="/singleTournament/{{tour._id}}/addTeam" class="btn btn-primary">Add a team</a>
-<a href="/singleTournament/{{tour._id}}/newGame" class="btn btn-primary">Add a new Game</a>
-  <h2>Teams</h2>
-{{#each tour.teams}}
-	<a href="/team/{{_id}}"><b>{{name}}</b></a>
-{{/each}}
+	<div class="table-responsive">
+		<table class="table table-sm table-hover">
+		<thead>
+	        <tr>
+	          <th>Team</th>
+	          <th>Region</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        {{#each tour.teams}}
+	        	<tr>
+	        		<td><a href="/team/{{_id}}"><b>{{name}}</b></a></td>
+	        		<td>{{region}}</td>
+	        	</tr>
+	        {{/each}}
+	    </tbody>
+	    </table>
+	</div>
+</div>
