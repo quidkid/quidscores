@@ -21,10 +21,26 @@ router.get('/', function(req, res, next) {
 }
 });
 
+
+router.post('/singleTournament/:id/saveGame', function(req, res, next) {
+  console.log("here i am today");
+  var newGame = new Game(req.body.data);
+  console.log("yo body ", req.body.data);
+  newGame.save(function(err, game) {
+    if (err) return next(err);
+    res.redirect('/tournaments');
+  })
+})
+
 router.post('/singleTournament/:id/newGame', function(req, res, next) {
   console.log("Posting");
   res.render('index', {
-    op1: req.body
+    op1: req.body.op1,
+    op2: req.body.op2,
+    teamid1: req.body.teamid1,
+    teamid2: req.body.teamid2,
+    tourId: req.params.id
+
   });
 })
 
