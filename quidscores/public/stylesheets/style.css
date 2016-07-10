@@ -33,6 +33,7 @@ h1 {
 .navbar-header {
 	margin: 0 auto !important;
 	float: left !important;
+	width: 100%;
 }
 
 .nav-full {
