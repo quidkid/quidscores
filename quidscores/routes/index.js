@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res) {
   console.log("Posting");
+  return;
 })
 
 // players
@@ -64,7 +65,6 @@ router.get('/addTournaments', function(req, res, next) {
 
 
 router.post('/addTournaments', function(req, res, next) {
-  console.log("here");
   var tour = new Tournament({
     name: req.body.tName,
     date: req.body.tDate,
@@ -77,24 +77,21 @@ router.post('/addTournaments', function(req, res, next) {
         error: error
       });
     } else {
-      console.log("here: ", tour);
       res.redirect('/tournaments');
     }
   })
-})
+});
 
 
 // tournaments
-
 router.get('/tournaments', function(req, res, next) {
-  Tournament.find().exec(function(err, tournament) {
+  Tournament.find().exec(function(err, tour) {
+      console.log("Tournament: ", tour);
+      console.log("Got", tour.length, "tournaments");
       res.render('tournaments', {
-        name: req.body.name,
-        date: req.body.date,
-        location: req.body.location
+        tour: tour
       })
   });
-  res.render('tournaments');
 });
 
 
