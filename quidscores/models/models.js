@@ -14,17 +14,11 @@ var userSchema = mongoose.Schema({
 
 userSchema.plugin(findOrCreate);
 
-var teamSchema = mongoose.Schema({
-	name: String,
-	region: String,
-	roster: {
-		type: [mongoose.Schema.Types.ObjectId],
-		ref: 'Player'
-	}
-});
 
 var playerSchema = mongoose.Schema({
-	name: String,
+	firstName: String,
+	lastName: String,
+	number: String, 
 	region: String,
 	age: Number,
 	height: String,
@@ -35,8 +29,36 @@ var playerSchema = mongoose.Schema({
 	otherPositions: {
 		type: [String]
 	},
+	teamId: {
+		type: mongoose.Schema.Types.ObjectId,
+    	ref: 'Team'
+	}
 	
 });
+
+
+var teamSchema = mongoose.Schema({
+	name: String,
+	region: String,
+	roster: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Player'
+	}]
+});
+
+teamSchema.methods.getPlayers = function (teamId, callback){
+    Player.find({teamId: teamId}).populate("").exec(function(error, playersArray) {
+      if (error) callback(error);
+      else {
+        callback(error, playersArray);
+      }
+
+    })
+  }
+
+var Team = mongoose.model('Team', teamSchema);
+
+
 
 var tournamentSchema = mongoose.Schema({
 	name: String,
