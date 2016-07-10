@@ -1,21 +1,21 @@
 <div class="col-md-6 col-xs-6 team">
-  <h1>Team 1</h1>
+  <h1>Team 1 :</h1><div id="insert"><span id="score1span">10</span></div>
 
   <form method="POST" class="score-update">
     <h1>Update Score</h1>
-
+    <input type="hidden" id="score1" name="score1" value="10">
     <div class="form-group">
       <label>Player Number</label>
-      <input type="text" name="playerNum1" class="form-control">
+      <input type="text" id="playerNum1" name="playerNum1" class="form-control">
     </div>
 
     <div class="form-group">
       <label>Comments</label>
-      <input type="text" name="comments1" class="form-control">
+      <input type="text" id="comments1" name="comments1" class="form-control">
     </div>
 
     <div class="form-group">
-      <button class="btn-round">GOAL</button>
+      <button type="submit" id="team1" class="btn-round">GOAL</button>
       <button class="btn-round btn-gold">SNITCH!</button>
     </div>
   </form>
@@ -25,22 +25,53 @@
 <div class="col-md-6 col-xs-6 team">
   <h1>Team 2</h1>
 
-  <form method="POST" class="score-update">
+  <form method="POST" id="team2" class="score-update">
     <h1>Update Score</h1>
-
+    
     <div class="form-group">
       <label>Player Number</label>
-      <input type="text" name="playerNum2" class="form-control">
+      <input type="text" id="playerNum2" name="playerNum2" class="form-control">
     </div>
 
     <div class="form-group">
       <label>Comments</label>
-      <input type="text" name="comments2" class="form-control">
+      <input type="text" id="comments2" name="comments2" class="form-control">
     </div>
 
     <div class="form-group">
-      <button class="btn-round">GOAL</button>
+      <button type="submit" id="team2" class="btn-round">GOAL</button>
       <button class="btn-round btn-gold">SNITCH!</button>
     </div>
   </form>
 </div>
+
+<script>
+$('#team1').on('click', function(e) {
+  console.log('hi izzy');
+  e.preventDefault();
+  var target = $(e.target);
+  var inputs = target.find('input');
+  var game1 = {};
+  inputs.each(function(i, inputElement) {
+    var val = $(inputElement).val();
+    var keyname = $(inputElement).attr('name');
+    game1[keyname] = val;
+  });
+
+   $.ajax('/', {
+    method: 'POST',
+    data: game1,
+    success: function() {
+      var playernum = $('#playerNum1').text();
+      var scoreTeam = parseInt($('#score1').text());
+      var newScore = scoreTeam + 10;
+
+      var score1span = $('<span id="score1span">');
+      score1span.text(newScore);
+
+
+    }
+  })
+
+})
+</script>
