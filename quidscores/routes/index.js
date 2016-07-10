@@ -15,7 +15,9 @@ var Player = models.Player;
 
 router.get('/', function(req, res, next) {
   if(req.user) {
-  res.render('index');
+  res.render('index', {
+    loggedIn: true
+  });
 } else {
   res.redirect('/login')
 }
@@ -35,7 +37,8 @@ router.get('/team/:id', function(req, res, next) {
   Game.find({$or: [{winner: req.params.id}, {loser: req.params.id}]})
   .populate('tournament').exec(function(error, games) {
   res.render('team', {
-  games: games
+  games: games,
+  loggedIn: true
   })
 
   })
@@ -47,7 +50,9 @@ router.get('/team/:id', function(req, res, next) {
 
 // add team
 router.get('/addTeam', function(req, res, next) {
-  res.render('addTeam');
+  res.render('addTeam', {
+    loggedIn: true
+  });
 });
 
 router.post('/addTeam', function(req, res, next) {
@@ -71,7 +76,9 @@ router.post('/addTeam', function(req, res, next) {
 
 // add singleplayer
 router.get('/singlePlayers', function(req, res, next) {
-  res.render('singlePlayers');
+  res.render('singlePlayers', {
+    loggedIn: true
+  });
 });
 //singlePlayer
 router.post('/singlePlayers', function(req, res, next) {
@@ -100,7 +107,8 @@ router.post('/singlePlayers', function(req, res, next) {
 router.get('/players', function(req, res, next) {
   Player.find().exec(function(err, playa) {
   res.render('players', {
-  playa: playa
+  playa: playa,
+  loggedIn: true
   })
 });
 })
@@ -109,13 +117,17 @@ router.get('/players', function(req, res, next) {
 
 // score
 router.get('/score', function(req, res, next) {
-  res.render('score');
+  res.render('score', {
+    loggedIn: true
+  });
 });
 
 // addTournaments
 
 router.get('/addTournaments', function(req, res, next) {
-  res.render('addTournaments');
+  res.render('addTournaments', {
+    loggedIn: true
+  });
 });
 
 
@@ -144,7 +156,8 @@ router.get('/tournaments', function(req, res, next) {
       console.log("Tournament: ", tour);
       console.log("Got", tour.length, "tournaments");
       res.render('tournaments', {
-        tour: tour
+        tour: tour,
+        loggedIn: true
       })
   });
 });
@@ -152,7 +165,8 @@ router.get('/tournaments', function(req, res, next) {
 router.get('/tournaments/:id', function(req, res) {
   Tournament.findById(req.params.id, function(err, tour) {
     res.render('singleTournament', {
-      tour: tour
+      tour: tour,
+      loggedIn: true
     })
   })
 })
@@ -166,11 +180,10 @@ router.get('/singleTournament/:id', function(req,res,next) {
     .populate('teams')
     .exec(function(error, tour) {
     console.log(tour._id);
-    // req.body.tournament.push(tour);
     console.log('array', tour.teams);
     res.render('singleTournament', {
-      // Tournament: req.body.tournament
-      tour: tour
+      tour: tour,
+      loggedIn: true
       })
     
   })
@@ -178,7 +191,9 @@ router.get('/singleTournament/:id', function(req,res,next) {
 
 // add Team
 router.get('/singleTournament/:id/addTeam', function(req, res, next) {
-  res.render('addTeam');
+  res.render('addTeam', {
+    loggedIn: true
+  });
 })
 
 router.post('/singleTournament/:id/addTeam', function(req, res, next) {
@@ -211,7 +226,8 @@ router.get('/singleTournament/:id/newGame', function(req, res, next) {
   Tournament.findById(req.params.id, function(error, tour) {
     if (error) return next(error);
     res.render('newGame', {
-      tour: tour
+      tour: tour,
+      loggedIn: true
     })
 
 
