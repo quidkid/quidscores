@@ -14,17 +14,11 @@ var userSchema = mongoose.Schema({
 
 userSchema.plugin(findOrCreate);
 
-var teamSchema = mongoose.Schema({
-	name: String,
-	region: String,
-	roster: {
-		type: [mongoose.Schema.Types.ObjectId],
-		ref: 'Player'
-	}
-});
 
 var playerSchema = mongoose.Schema({
-	name: String,
+	firstName: String,
+	lastName: String,
+	number: String, 
 	region: String,
 	age: Number,
 	height: String,
@@ -35,7 +29,21 @@ var playerSchema = mongoose.Schema({
 	otherPositions: {
 		type: [String]
 	},
+	teamId: {
+		type: mongoose.Schema.Types.ObjectId,
+    	ref: 'Team'
+	}
 	
+});
+
+
+var teamSchema = mongoose.Schema({
+	name: String,
+	region: String,
+	roster: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Player'
+	}]
 });
 
 var tournamentSchema = mongoose.Schema({
