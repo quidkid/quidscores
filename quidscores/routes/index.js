@@ -15,19 +15,12 @@ var Player = models.Player;
 
 router.get('/', function(req, res, next) {
   if(req.user) {
-<<<<<<< HEAD
-    res.render('index');
+    res.render('index', {
+      loggedIn: true
+    });
   } else {
     res.redirect('/login')
   }
-=======
-  res.render('index', {
-    loggedIn: true
-  });
-} else {
-  res.redirect('/login')
-}
->>>>>>> ba023c9129e6ac46fe6e3371deb4150f05e48442
 });
 
 
@@ -60,26 +53,13 @@ router.get('/team/:id', function(req, res, next) {
   Team.findById(req.params.id, function(err, team) {
     Game.find({$or: [{winner: req.params.id}, {loser: req.params.id}]})
   .populate('tournament').exec(function(error, games) {
-<<<<<<< HEAD
-    res.render('team', {
-      games: games
+      res.render('team', {
+      team: team,
+      games: games,
+      loggedIn: true
+      })
     })
-
   })
-  
-=======
-  res.render('team', {
-  team: team,
-  games: games,
-  loggedIn: true
-  })
-
-  })
-  })
-  
-    
->>>>>>> ba023c9129e6ac46fe6e3371deb4150f05e48442
-  
 });
 
 
@@ -142,18 +122,11 @@ router.post('/singlePlayers', function(req, res, next) {
 // players
 router.get('/players', function(req, res, next) {
   Player.find().exec(function(err, playa) {
-<<<<<<< HEAD
-    res.render('players', {
-      playa: playa
-    })
-  });
-=======
   res.render('players', {
   playa: playa,
   loggedIn: true
   })
 });
->>>>>>> ba023c9129e6ac46fe6e3371deb4150f05e48442
 })
 
 
@@ -196,20 +169,12 @@ router.post('/addTournaments', function(req, res, next) {
 // tournaments
 router.get('/tournaments', function(req, res, next) {
   Tournament.find().exec(function(err, tour) {
-<<<<<<< HEAD
-    console.log("Tournament: ", tour);
-    console.log("Got", tour.length, "tournaments");
-    res.render('tournaments', {
-      tour: tour
-    })
-=======
       console.log("Tournament: ", tour);
       console.log("Got", tour.length, "tournaments");
       res.render('tournaments', {
         tour: tour,
         loggedIn: true
       })
->>>>>>> ba023c9129e6ac46fe6e3371deb4150f05e48442
   });
 });
 
@@ -233,16 +198,9 @@ router.get('/singleTournament/:id', function(req,res,next) {
     console.log(tour._id);
     console.log('array', tour.teams);
     res.render('singleTournament', {
-<<<<<<< HEAD
-      // Tournament: req.body.tournament
-      tour: tour
-    })
-=======
       tour: tour,
       loggedIn: true
       })
->>>>>>> ba023c9129e6ac46fe6e3371deb4150f05e48442
-    
   })
 })
 
@@ -291,23 +249,4 @@ router.get('/singleTournament/:id/newGame', function(req, res, next) {
   })
 })
 
-
-
-
-
-
-
 module.exports = router;
-
-
-
-
-
-
-
-// login
-// register
-// index --> scores 
-// players
-// singlePlayer
-// logout 
