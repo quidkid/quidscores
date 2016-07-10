@@ -4,7 +4,7 @@ var models = require('../models/models');
 var Tournament = models.Tournament;
 var Team = models.Team;
 var Game = models.Game;
-var Player = require('../models/models');
+var Player = models.Player;
 
 // add the following first in models: 
 // var User = 
@@ -29,6 +29,7 @@ router.post('/singleTournament/:id/newGame', function(req, res, next) {
 })
 
 // players
+
 router.get('/team/:id', function(req, res, next) {
 
   Game.find({$or: [{winner: req.params.id}, {loser: req.params.id}]})
@@ -43,19 +44,67 @@ router.get('/team/:id', function(req, res, next) {
 });
 
 
-//singlePlayer
-router.get('/singlePlayers/:id', function(req, res, next) {
-  Player.findById(req.params.id, function(error, user){
-      res.render('singlePlayers', {
-     name: req.body.name,
-     age: req.body.age,
-     height: req.body.height,
-	region: req.body.region,
-	mainPosition: req.body.mainPosition,
-	otherPositions: req.body.otherPositions
-      })
-  });
+
+// add team
+router.get('/addTeam', function(req, res, next) {
+  res.render('addTeam');
 });
+
+router.post('/addTeam', function(req, res, next) {
+  var tea = new Team({
+    name: req.body.name,
+    region: req.body.region
+  })
+  tea.save(function(error) {
+    if(error) {
+      console.log('hmm?', error)
+      res.render('addTeam', {
+        error: error
+      });
+    } else {
+      res.redirect('/team');
+    }
+  })
+});
+
+
+
+// add singleplayer
+router.get('/singlePlayers', function(req, res, next) {
+  res.render('singlePlayers');
+});
+//singlePlayer
+router.post('/singlePlayers', function(req, res, next) {
+  var playa = new Player({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    number: req.body.number,
+    region: req.body.region,
+    age: req.body.age,
+    height: req.body.height,
+    mainPosition: req.body.mainPosition
+  })
+  playa.save(function(error) {
+    if(error) {
+      console.log('hmm?', error)
+      res.render('singleplayer', {
+        error: error
+      });
+    } else {
+      res.redirect('/players');
+    }
+  })
+});
+
+// players
+router.get('/players', function(req, res, next) {
+  Player.find().exec(function(err, playa) {
+  res.render('players', {
+  playa: playa
+  })
+});
+})
+
 
 
 // score
@@ -100,11 +149,16 @@ router.get('/tournaments', function(req, res, next) {
   });
 });
 
+router.get('/tournaments/:id', function(req, res) {
+  Tournament.findById(req.params.id, function(err, tour) {
+    res.render('singleTournament', {
+      tour: tour
+    })
+  })
+})
 
-// singleplayer
-router.get('/singlePlayer', function(req, res, next) {
-  res.render('singlePlayer');
-});
+
+
 
 // singleTournament
 router.get('/singleTournament/:id', function(req,res,next) {
