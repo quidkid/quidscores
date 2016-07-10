@@ -34,6 +34,7 @@ router.get('/team', function(req, res, next) {
   })
 	res.render('team');
 });
+})
 
 
 //singlePlayer
