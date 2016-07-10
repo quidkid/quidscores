@@ -1,0 +1,26 @@
+{{#if error}}
+  <div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    {{error}}
+  </div>
+{{/if}}
+
+<form method="POST" class="form">
+<h3>Tournament</h3>
+  <div class="form-group">
+    <label>Tournament name</label>
+    <input type="text" name="tName" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Date</label>
+    <input type="text" name="tDate" class="form-control">
+  </div>
+  <div class="form-group">
+    <label>Location</label>
+    <input type="text" name="tLocation" class="form-control">
+  </div>
+  <div class="form-group">
+    <a class="btn btn-primary" href="/register">Submit</a>
+  </div>
+</form>
